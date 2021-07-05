@@ -90,12 +90,12 @@ public class ValidateInterceptorForPTTL implements HandlerInterceptor {
 					System.out.println(sb.toString());
 					System.out.println("######################################");
 				}
+				Map params = parserRequest(jsonBody, request);
+					if(params==null)params = new HashMap();
 				Set<Entry<String,ControlField>> set = rules.entrySet();
 				for(Entry<String,ControlField> entry:set){
 					String key = entry.getKey();
 					ControlField cf = entry.getValue();
-					Map params = parserRequest(jsonBody, request);
-					if(params==null)params = new HashMap();
 					String error = ValidateParser.validate(cf.getFieldExplain(),params.get(cf.getFieldName()),cf.getRules());
 					if(error!=null) {
 						if(tempError==null)tempError = error;
