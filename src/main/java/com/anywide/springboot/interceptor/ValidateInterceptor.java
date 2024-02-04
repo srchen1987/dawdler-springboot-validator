@@ -15,6 +15,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -55,8 +59,7 @@ public class ValidateInterceptor implements HandlerInterceptor {
 			}
 			String uri = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
 			if(uri==null)return true;
-			Map<String,ControlField> rules =  cv.getMappings().get(uri);
-			if(rules==null)rules=cv.getGlobalControlFields();
+			Map<String,ControlField> rules =  cv.getParamFields(uri);
 			if(rules!=null){
 				if(ra!=null&&ra.generateValidator()&&!rules.isEmpty()){
 					StringBuffer sb = new StringBuffer("sir_validate.addRule(");
