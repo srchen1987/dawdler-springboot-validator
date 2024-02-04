@@ -14,9 +14,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -35,6 +32,9 @@ import com.anywide.dawdler.clientplug.web.validator.entity.ControlValidator;
 import com.anywide.dawdler.clientplug.web.validator.webbind.ValidateResourceLoader;
 import com.anywide.springboot.annotation.RequestMappingAssist;
 import com.anywide.springboot.filter.ValidateFilter.BodyReaderHttpServletRequestWrapper;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 public class ValidateInterceptorForPTTL implements HandlerInterceptor {
 	private static ConcurrentHashMap<Class, ControlValidator> validators = new ConcurrentHashMap<>();
 	private static DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
@@ -64,9 +64,8 @@ public class ValidateInterceptorForPTTL implements HandlerInterceptor {
 				if(preCv!=null)cv = preCv;
 			}
 			String uri = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
-			if(!cv.isValidate()||uri==null)return true;
-			Map<String,ControlField> rules =  cv.getMappings().get(uri);
-			if(rules==null)rules=cv.getGlobalControlFields();
+			if(uri==null)return true;
+			Map<String,ControlField> rules =  cv.getParamFields(uri);
 			if(rules!=null){
 				if(ra!=null&&ra.generateValidator()&&!rules.isEmpty()){
 					StringBuffer sb = new StringBuffer("sir_validate.addRule(");

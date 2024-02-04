@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.18</version>
+		<version>3.2.0</version>
 		<relativePath />
 	</parent>
 	<groupId>dawdler</groupId>
@@ -16,20 +16,14 @@
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
@@ -45,8 +39,13 @@
 		</dependency>
 		<dependency>
 			<groupId>dawdler</groupId>
+			<artifactId>dawdler-jakarta-fileupload</artifactId>
+			<version>0.17.1-jdk17-RELEASES</version>
+		</dependency>
+		<dependency>
+			<groupId>dawdler</groupId>
 			<artifactId>dawdler-client-plug-validator</artifactId>
-			<version>0.0.1-RELEASES</version>
+			<version>0.17.1-jdk17-RELEASES</version>
 		</dependency>
 	</dependencies>
 </project>
