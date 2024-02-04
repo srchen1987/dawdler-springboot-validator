@@ -17,10 +17,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -32,6 +28,7 @@ import com.anywide.dawdler.clientplug.web.util.JsonProcessUtil;
 import com.anywide.dawdler.clientplug.web.validator.ValidateParser;
 import com.anywide.dawdler.clientplug.web.validator.entity.ControlField;
 import com.anywide.dawdler.clientplug.web.validator.entity.ControlValidator;
+import com.anywide.dawdler.clientplug.web.validator.entity.ControlValidator.MappingFeildType;
 import com.anywide.dawdler.clientplug.web.validator.webbind.ValidateResourceLoader;
 import com.anywide.springboot.annotation.RequestMappingAssist;
 import com.anywide.springboot.filter.ValidateFilter.BodyReaderHttpServletRequestWrapper;
@@ -64,9 +61,11 @@ public class ValidateInterceptorForPTTL implements HandlerInterceptor {
 				if(preCv!=null)cv = preCv;
 			}
 			String uri = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
-			if(!cv.isValidate()||uri==null)return true;
-			Map<String,ControlField> rules =  cv.getMappings().get(uri);
-			if(rules==null)rules=cv.getGlobalControlFields();
+			if(uri==null)return true;
+			Map<String, ControlField> rules = cv.getParamFields(uri);
+			if (rules == null) {
+				rules = cv.getParamGlobalFields();
+			}
 			if(rules!=null){
 				if(ra!=null&&ra.generateValidator()&&!rules.isEmpty()){
 					StringBuffer sb = new StringBuffer("sir_validate.addRule(");
