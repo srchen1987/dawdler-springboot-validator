@@ -46,6 +46,7 @@ public class ValidateInterceptorForPTTL implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
     	boolean dovalidate=o instanceof HandlerMethod;
+		System.out.println("dovalidate:"+dovalidate);
 		if(dovalidate){
 			String tempError = null;
 			HandlerMethod m = (HandlerMethod)o;
