@@ -24,3 +24,8 @@ bin/
 .project
 .settings
 .vscode/settings.json
+.classpath
+.settings/org.eclipse.jdt.core.prefs
+.project
+.gitignore
+.classpath
