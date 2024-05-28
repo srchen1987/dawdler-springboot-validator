@@ -1,0 +1,2 @@
+com.anywide.springboot.filter.ValidateFilterConfig
+com.anywide.springboot.interceptor.ValidateAdapter

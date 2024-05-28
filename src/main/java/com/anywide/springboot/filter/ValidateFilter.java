@@ -6,9 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -17,15 +14,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 /**
  * Servlet Filter implementation class ValidateFilter
  */
-@Component
-@Order(1)
-@WebFilter(filterName = "ValidateFilter", urlPatterns = "/*")
 public class ValidateFilter implements Filter {
 
     /**
