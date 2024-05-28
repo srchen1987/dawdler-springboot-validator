@@ -46,7 +46,6 @@ public class ValidateInterceptorForPTTL implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
     	boolean dovalidate=o instanceof HandlerMethod;
-		System.out.println("dovalidate:"+dovalidate);
 		if(dovalidate){
 			String tempError = null;
 			HandlerMethod m = (HandlerMethod)o;
@@ -136,6 +135,7 @@ public class ValidateInterceptorForPTTL implements HandlerInterceptor {
     private static Map parserRequest(boolean jsonType, HttpServletRequest request) throws FileUploadException, UnsupportedEncodingException {
 		Map params = new HashMap();
 		if (jsonType) {
+			System.out.println(request.getClass().getName());
 			if(request.getClass().isAssignableFrom(BodyReaderHttpServletRequestWrapper.class)) {//原因同上，因为一个架构师用了阿里的 sandbox 正常不需要判断这个 
 				BodyReaderHttpServletRequestWrapper rw = (BodyReaderHttpServletRequestWrapper) request;
 				Map map = JsonProcessUtil.jsonToBean(rw.getBody(),HashMap.class);
