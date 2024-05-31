@@ -42,7 +42,6 @@ public class ValidateFilter implements Filter {
 		response.setCharacterEncoding("utf-8");
 		String type = hrequest.getHeader("Content-Type");
 		boolean isJson = type != null && type.contains("application/json");
-		System.out.println(hrequest.getRequestURI() + ":" + request.getRequestId() + ":isJson: " + isJson);
 		if (isJson) {
 			ServletRequest requestWrapper = new BodyReaderHttpServletRequestWrapper(hrequest);
 			chain.doFilter(requestWrapper, response);
