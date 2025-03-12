@@ -38,14 +38,14 @@
 			<artifactId>jackson-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>dawdler</groupId>
+			<groupId>club.dawdler</groupId>
 			<artifactId>dawdler-jakarta-fileupload</artifactId>
-			<version>0.17.1-jdk17-RELEASES</version>
+			<version>0.0.8-jdk17-RELEASES</version>
 		</dependency>
 		<dependency>
-			<groupId>dawdler</groupId>
+			<groupId>club.dawdler</groupId>
 			<artifactId>dawdler-client-plug-validator</artifactId>
-			<version>0.17.1-jdk17-RELEASES</version>
+			<version>0.0.8-jdk17-RELEASES</version>
 		</dependency>
 	</dependencies>
 </project>
